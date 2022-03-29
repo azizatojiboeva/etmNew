@@ -3,6 +3,7 @@ package uz.elmurodov.services;
 import uz.elmurodov.dtos.GenericBaseDto;
 import uz.elmurodov.dtos.GenericDto;
 import uz.elmurodov.repository.BaseRepository;
+import uz.elmurodov.response.Data;
 import uz.elmurodov.response.ResponseEntity;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import java.io.Serializable;
 public abstract class BaseService<R extends BaseRepository,
         CR extends GenericBaseDto,
         D extends GenericDto,
+        UD extends GenericDto ,
         K extends Serializable> {
     protected R repository;
 
@@ -24,8 +26,8 @@ public abstract class BaseService<R extends BaseRepository,
         this.repository = repository;
     }
 
-    public abstract ResponseEntity<K> create(CR dto);
-
+    public abstract ResponseEntity<Data<?>> create(CR dto);
+    public abstract ResponseEntity<Data<?>> update(UD dto);
     public abstract ResponseEntity<D> get(K id);
 
 }

@@ -6,4 +6,5 @@ public class ApplicationProperties extends BaseProperty {
         super("src/main/resources/application.properties");
     }
 
+
 }

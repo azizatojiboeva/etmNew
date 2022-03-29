@@ -3,7 +3,6 @@ package uz.elmurodov.repository;
 import lombok.SneakyThrows;
 import uz.elmurodov.container.UNIContainer;
 import uz.elmurodov.exception.CustomerSQLException;
-import uz.elmurodov.utils.BaseUtils;
 
 import java.io.Serializable;
 import java.sql.*;
@@ -18,6 +17,15 @@ public class BaseRepository {
             prepareToExecute(statement);
             ResultSet resultSet = statement.executeQuery();
             return prepareResultSet(resultSet, outType);
+        } catch (SQLException ex) {
+            throw new CustomerSQLException(ex.getMessage(), ex.getCause());
+        }
+    }
+    protected void callProcedure(String query) {
+        try {
+            CallableStatement statement = connection.prepareCall(query);
+            prepareToExecute(statement);
+            statement.execute();
         } catch (SQLException ex) {
             throw new CustomerSQLException(ex.getMessage(), ex.getCause());
         }

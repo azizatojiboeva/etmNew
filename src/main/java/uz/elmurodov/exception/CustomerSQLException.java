@@ -32,9 +32,9 @@ public class CustomerSQLException extends RuntimeException {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        if (friendlyMessage.contains("ERROR_CODE_INTERNAL"))
+        if ("ERROR_CODE_INTERNAL".contains(friendlyMessage))
             status = HttpStatus.HTTP_500;
-        else if (friendlyMessage.contains("ERROR_CODE_BAD_REQUEST"))
+        else if ("ERROR_CODE_BAD_REQUEST".contains(friendlyMessage))
             status = HttpStatus.HTTP_400;
         else
             status = HttpStatus.UNDEFINED;
